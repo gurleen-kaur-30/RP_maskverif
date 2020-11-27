@@ -1,0 +1,29 @@
+proc SECURE_MULT:
+  inputs: w8 a[0:3], w8 b[0:3]
+  outputs: w8 c[0:3]
+  randoms: w8 r01, w8 r02, w8 r03, w8 r12, w8 r13, w8 r23;
+  c[0] := a[0] &w8 b[0];
+  c[1] := a[1] &w8 b[1];
+  c[2] := a[2] &w8 b[2];
+  c[3] := a[3] &w8 b[3];
+  c[0] := c[0] ^w8 r01;
+  c[0] := c[0] ^w8 r02;
+  c[0] := c[0] ^w8 r03;
+  c[1] := c[1] ^w8 ((r01 ^w8 (a[0] &w8 b[1])) ^w8 (a[1] &w8 b[0])); 
+  c[1] := c[1] ^w8 r12;
+  c[1] := c[1] ^w8 r13;
+  c[2] := c[2] ^w8 ((r02 ^w8 (a[0] &w8 b[2])) ^w8 (a[2] &w8 b[0])); 
+  c[2] := c[2] ^w8 ((r12 ^w8 (a[1] &w8 b[2])) ^w8 (a[2] &w8 b[1])); 
+  c[2] := c[2] ^w8 r23;
+  c[3] := c[3] ^w8 ((r03 ^w8 (a[0] &w8 b[3])) ^w8 (a[3] &w8 b[0])); 
+  c[3] := c[3] ^w8 ((r13 ^w8 (a[1] &w8 b[3])) ^w8 (a[3] &w8 b[1])); 
+  c[3] := c[3] ^w8 ((r23 ^w8 (a[2] &w8 b[3])) ^w8 (a[3] &w8 b[2]));
+end
+
+verbose 1
+
+order 3 noglitch Probing SECURE_MULT
+
+
+
+

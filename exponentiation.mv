@@ -1,0 +1,154 @@
+proc SECURE_SQUARE:
+    inputs : w8 a[0:3]
+    outputs : w8 c[0:3];
+    c[0] := a[0] &w8 a[0];
+    c[1] := a[1] &w8 a[1];
+    c[2] := a[2] &w8 a[2];
+    c[3] := a[3] &w8 a[3];
+end
+
+proc SECURE_POWER4:
+    inputs : w8 a[0:3]
+    outputs : w8 c[0:3];
+    c[0] := a[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[1] := a[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[2] := a[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[3] := a[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+end
+
+proc SECURE_POWER16:
+    inputs : w8 a[0:3]
+    outputs : w8 c[0:3];
+    c[0] := a[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[0] := c[0] &w8 a[0];
+    c[1] := a[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[1] := c[1] &w8 a[1];
+    c[2] := a[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[2] := c[2] &w8 a[2];
+    c[3] := a[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+    c[3] := c[3] &w8 a[3];
+end
+
+
+proc REFRESH_MASKS:
+  inputs: w8 a[0:3]
+  outputs: w8 b[0:3]
+  randoms: w8 r1, w8 r2, w8 r3;
+
+  b[0] := a[0] ^w8 r1;
+  b[1] := a[1] ^w8 r1;
+  b[0] := b[0] ^w8 r2;
+  b[2] := a[2] ^w8 r2;
+  b[0] := b[0] ^w8 r3;
+  b[3] := a[3] ^w8 r3;
+end
+
+proc SECURE_MULT:
+  inputs: w8 a[0:3], w8 b[0:3]
+  outputs: w8 c[0:3]
+  randoms: w8 r01, w8 r02, w8 r03, w8 r12, w8 r13, w8 r23;
+  c[0] := a[0] &w8 b[0];
+  c[1] := a[1] &w8 b[1];
+  c[2] := a[2] &w8 b[2];
+  c[3] := a[3] &w8 b[3];
+  c[0] := c[0] ^w8 r01;
+  c[0] := c[0] ^w8 r02;
+  c[0] := c[0] ^w8 r03;
+  c[1] := c[1] ^w8 ((r01 ^w8 (a[0] &w8 b[1])) ^w8 (a[1] &w8 b[0])); 
+  c[1] := c[1] ^w8 r12;
+  c[1] := c[1] ^w8 r13;
+  c[2] := c[2] ^w8 ((r02 ^w8 (a[0] &w8 b[2])) ^w8 (a[2] &w8 b[0])); 
+  c[2] := c[2] ^w8 ((r12 ^w8 (a[1] &w8 b[2])) ^w8 (a[2] &w8 b[1])); 
+  c[2] := c[2] ^w8 r23;
+  c[3] := c[3] ^w8 ((r03 ^w8 (a[0] &w8 b[3])) ^w8 (a[3] &w8 b[0])); 
+  c[3] := c[3] ^w8 ((r13 ^w8 (a[1] &w8 b[3])) ^w8 (a[3] &w8 b[1])); 
+  c[3] := c[3] ^w8 ((r23 ^w8 (a[2] &w8 b[3])) ^w8 (a[3] &w8 b[2]));
+end
+
+
+proc SECURE_EXPONENTIATION:
+    inputs: w8 x[0:3]
+    outputs: w8 y[0:3];
+    z[0:3] = SECURE_SQUARE(x);
+    a[0:3] = REFRESH_MASKS(z[0:3]);
+    z[0:3] = a[0:3];
+    y = SECURE_MULT(z[0:3],x);
+    w[0:3] = SECURE_POWER4(y);
+    b[0:3] = REFRESH_MASKS(w[0:3]);
+    w[0:3] = b[0:3];
+    s[0:3] = SECURE_MULT(y,w[0:3]);
+    y = s[0:3];
+    q[0:3] = SECURE_POWER16(y);
+    y = q[0:3];
+    p[0:3] = SECURE_MULT(y,w[0:3]);
+    y = p[0:3];
+    m[0:3] = SECURE_MULT(y,z[0:3]);
+    y = m[0:3];
+end
+verbose 1
+noglitch order 3 Probing SECURE_EXPONENTIATION 
+
+
+
+
+

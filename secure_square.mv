@@ -1,0 +1,12 @@
+proc SECURE_SQUARE:
+    inputs : w8 a[0:3]
+    outputs : w8 c[0:3];
+    c[0] := a[0] &w8 a[0];
+    c[1] := a[1] &w8 a[1];
+    c[2] := a[2] &w8 a[2];
+    c[3] := a[3] &w8 a[3];
+end
+
+
+verbose 1
+noglitch Probing SECURE_SQUARE
